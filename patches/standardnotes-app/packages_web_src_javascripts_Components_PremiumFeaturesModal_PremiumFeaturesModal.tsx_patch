@@ -1,0 +1,9 @@
+diff --git a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/PremiumFeaturesModal/PremiumFeaturesModal.tsx b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/PremiumFeaturesModal/PremiumFeaturesModal.tsx
+index 6316ea2..40facb6 100644
+--- a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/PremiumFeaturesModal/PremiumFeaturesModal.tsx
++++ b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/PremiumFeaturesModal/PremiumFeaturesModal.tsx
+@@ -51,3 +51,4 @@ const PremiumFeaturesModal: FunctionComponent<Props> = ({
+ }
+ 
+ export default PremiumFeaturesModal
++          

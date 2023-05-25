@@ -1,0 +1,12 @@
+diff --git a/node_modules/standardnotes-app/packages/api/src/Domain/Client/User/UserApiServiceInterface.ts b/node_modules/standardnotes-app/packages/api/src/Domain/Client/User/UserApiServiceInterface.ts
+index e951b7f..6bfb214 100644
+--- a/node_modules/standardnotes-app/packages/api/src/Domain/Client/User/UserApiServiceInterface.ts
++++ b/node_modules/standardnotes-app/packages/api/src/Domain/Client/User/UserApiServiceInterface.ts
+@@ -10,6 +10,7 @@ export interface UserApiServiceInterface {
+   register(registerDTO: {
+     email: string
+     serverPassword: string
++    regToken: string
+     keyParams: RootKeyParamsInterface
+     ephemeral: boolean
+   }): Promise<HttpResponse<UserRegistrationResponseBody>>

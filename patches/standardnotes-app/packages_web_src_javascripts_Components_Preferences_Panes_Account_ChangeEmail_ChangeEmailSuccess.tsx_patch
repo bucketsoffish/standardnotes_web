@@ -1,0 +1,13 @@
+diff --git a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/Account/ChangeEmail/ChangeEmailSuccess.tsx b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/Account/ChangeEmail/ChangeEmailSuccess.tsx
+index c06aa8b..82b241e 100644
+--- a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/Account/ChangeEmail/ChangeEmailSuccess.tsx
++++ b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/Account/ChangeEmail/ChangeEmailSuccess.tsx
+@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react'
+ const ChangeEmailSuccess: FunctionComponent = () => {
+   return (
+     <div>
+-      <div className={'mb-2 font-bold text-info'}>Your email has been successfully changed.</div>
++      <div className={'mb-2 font-bold text-info'}>Your username has been successfully changed.</div>
+       <p>
+         Please ensure you are running the latest version of Standard Notes on all platforms to ensure maximum
+         compatibility.

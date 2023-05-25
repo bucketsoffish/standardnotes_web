@@ -1,0 +1,13 @@
+diff --git a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/Account/ChangeEmail/ChangeEmail.tsx b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/Account/ChangeEmail/ChangeEmail.tsx
+index 8b8266f..8cc4644 100644
+--- a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/Account/ChangeEmail/ChangeEmail.tsx
++++ b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/Account/ChangeEmail/ChangeEmail.tsx
+@@ -140,7 +140,7 @@ const ChangeEmail: FunctionComponent<Props> = ({ onCloseDialog, application }) =
+   )
+ 
+   return (
+-    <Modal title="Change Email" close={handleDialogClose} actions={modalActions}>
++    <Modal title="Change Username" close={handleDialogClose} actions={modalActions}>
+       <div className="px-4.5 py-4">
+         {currentStep === Steps.InitialStep && (
+           <ChangeEmailForm setNewEmail={setNewEmail} setCurrentPassword={setCurrentPassword} />

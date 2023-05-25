@@ -1,0 +1,21 @@
+diff --git a/node_modules/standardnotes-server/packages/api-gateway/src/Bootstrap/Container.ts b/node_modules/standardnotes-server/packages/api-gateway/src/Bootstrap/Container.ts
+index 514ec8c..de16868 100644
+--- a/node_modules/standardnotes-server/packages/api-gateway/src/Bootstrap/Container.ts
++++ b/node_modules/standardnotes-server/packages/api-gateway/src/Bootstrap/Container.ts
+@@ -9,6 +9,7 @@ import { Timer, TimerInterface } from '@standardnotes/time'
+ import { Env } from './Env'
+ import TYPES from './Types'
+ import { AuthMiddleware } from '../Controller/AuthMiddleware'
++import { RequestValidator } from '../Controller/RequestValidator'
+ import { HttpServiceInterface } from '../Service/Http/HttpServiceInterface'
+ import { HttpService } from '../Service/Http/HttpService'
+ import { SubscriptionTokenAuthMiddleware } from '../Controller/SubscriptionTokenAuthMiddleware'
+@@ -73,6 +74,8 @@ export class ContainerConfigLoader {
+       .bind<SubscriptionTokenAuthMiddleware>(TYPES.SubscriptionTokenAuthMiddleware)
+       .to(SubscriptionTokenAuthMiddleware)
+ 
++    container.bind<RequestValidator>(TYPES.RequestValidator).to(RequestValidator)
++
+     // Services
+     container.bind<HttpServiceInterface>(TYPES.HTTPService).to(HttpService)
+     container.bind<CrossServiceTokenCacheInterface>(TYPES.CrossServiceTokenCache).to(RedisCrossServiceTokenCache)

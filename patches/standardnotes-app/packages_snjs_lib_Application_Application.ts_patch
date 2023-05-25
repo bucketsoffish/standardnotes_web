@@ -1,0 +1,74 @@
+diff --git a/node_modules/standardnotes-app/packages/snjs/lib/Application/Application.ts b/node_modules/standardnotes-app/packages/snjs/lib/Application/Application.ts
+index a437fca..c2a90a3 100644
+--- a/node_modules/standardnotes-app/packages/snjs/lib/Application/Application.ts
++++ b/node_modules/standardnotes-app/packages/snjs/lib/Application/Application.ts
+@@ -215,6 +215,8 @@ export class SNApplication implements ApplicationInterface, AppGroupManagedAppli
+   public alertService: ExternalServices.AlertService
+   public readonly identifier: Common.ApplicationIdentifier
+   public readonly options: FullyResolvedApplicationOptions
++  public host: string
++  public isRegistering = false
+ 
+   constructor(options: ApplicationConstructorOptions) {
+     const allOptions: FullyResolvedApplicationOptions = {
+@@ -251,6 +253,7 @@ export class SNApplication implements ApplicationInterface, AppGroupManagedAppli
+     this.deviceInterface = options.deviceInterface
+     this.alertService = options.alertService
+     this.identifier = options.identifier
++    this.host = options.defaultHost.replace(/HOST_REPLACEMENT/ig, window.location.host)
+     this.options = Object.freeze(allOptions)
+ 
+     this.constructInternalEventBus()
+@@ -672,6 +675,7 @@ export class SNApplication implements ApplicationInterface, AppGroupManagedAppli
+    * Set the server's URL
+    */
+   public async setHost(host: string): Promise<void> {
++    host = host.replace(/HOST_REPLACEMENT/ig, window.location.host)
+     this.httpService.setHost(host)
+ 
+     await this.apiService.setHost(host)
+@@ -682,6 +686,7 @@ export class SNApplication implements ApplicationInterface, AppGroupManagedAppli
+   }
+ 
+   public async setCustomHost(host: string): Promise<void> {
++    host = host.replace(/HOST_REPLACEMENT/ig, window.location.host)
+     await this.setHost(host)
+ 
+     this.webSocketsService.setWebSocketUrl(undefined)
+@@ -694,6 +699,14 @@ export class SNApplication implements ApplicationInterface, AppGroupManagedAppli
+     return this.sessionManager.getUser()
+   }
+ 
++  public getIsRegistering(): boolean {
++    return this.isRegistering
++  }
++  
++  public setIsRegistering(value: boolean) {
++    this.isRegistering = value
++  }
++
+   public getUserPasswordCreationDate(): Date | undefined {
+     return this.protocolService.getPasswordCreatedDate()
+   }
+@@ -923,10 +936,11 @@ export class SNApplication implements ApplicationInterface, AppGroupManagedAppli
+   public async register(
+     email: string,
+     password: string,
++    regToken: string,
+     ephemeral = false,
+     mergeLocal = true,
+   ): Promise<UserRegistrationResponseBody> {
+-    return this.userService.register(email, password, ephemeral, mergeLocal)
++    return this.userService.register(email, password, regToken, ephemeral, mergeLocal)
+   }
+ 
+   /**
+@@ -1486,7 +1500,7 @@ export class SNApplication implements ApplicationInterface, AppGroupManagedAppli
+     this.apiService = new InternalServices.SNApiService(
+       this.httpService,
+       this.diskStorageService,
+-      this.options.defaultHost,
++      this.host,
+       this.inMemoryStore,
+       this.options.crypto,
+       this.sessionStorageMapper,

@@ -1,0 +1,33 @@
+diff --git a/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v1/RevisionsController.ts b/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v1/RevisionsController.ts
+index dd5a98e..5613220 100644
+--- a/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v1/RevisionsController.ts
++++ b/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v1/RevisionsController.ts
+@@ -1,7 +1,9 @@
+ import { BaseHttpController, controller, httpDelete, httpGet, results } from 'inversify-express-utils'
+ import TYPES from '../../Bootstrap/Types'
++import { param } from "express-validator";
++import { Validators } from '../Validators'
+ 
+-@controller('/v1/items/:item_id/revisions', TYPES.AuthMiddleware)
++@controller('/v1/items/:item_id/revisions', TYPES.AuthMiddleware, param("item_id").custom(uuid => { return Validators.isUUID(uuid); }), TYPES.RequestValidator)
+ export class RevisionsController extends BaseHttpController {
+   @httpGet('/')
+   async getRevisions(): Promise<results.JsonResult> {
+@@ -15,7 +17,7 @@ export class RevisionsController extends BaseHttpController {
+     )
+   }
+ 
+-  @httpGet('/:id')
++  @httpGet('/:id', param("id").custom(uuid => { return Validators.isUUID(uuid); }), TYPES.RequestValidator)
+   async getRevision(): Promise<results.JsonResult> {
+     return this.json(
+       {
+@@ -27,7 +29,7 @@ export class RevisionsController extends BaseHttpController {
+     )
+   }
+ 
+-  @httpDelete('/:id')
++  @httpDelete('/:id', param("id").custom(uuid => { return Validators.isUUID(uuid); }), TYPES.RequestValidator)
+   async deleteRevision(): Promise<results.JsonResult> {
+     return this.json(
+       {

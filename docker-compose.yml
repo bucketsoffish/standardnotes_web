@@ -1,0 +1,84 @@
+services:
+  server:
+    image: standardnotes/server:latest
+    env_file: .env
+    container_name: server_self_hosted
+    build: ./node_modules/standardnotes-server
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+      - 3125:3104
+    volumes:
+      - ./logs:/var/lib/server/logs
+      - ./data/uploads:/opt/bundled/files/packages/files/dist/uploads
+    networks:
+      - standardnotes_self_hosted
+
+  localstack:
+    image: localstack/localstack:1.3
+    container_name: localstack_self_hosted
+    expose:
+      - 4566
+    restart: unless-stopped
+    environment:
+      - SERVICES=sns,sqs
+      - HOSTNAME_EXTERNAL=localstack
+      - LS_LOG=warn
+      - DISABLE_EVENTS=1
+    volumes:
+      - ./scripts/localstack_bootstrap.sh:/etc/localstack/init/ready.d/localstack_bootstrap.sh
+    networks:
+      - standardnotes_self_hosted
+
+  db:
+    image: mysql:8
+    container_name: db_self_hosted
+    environment:
+      MYSQL_DATABASE: '${DB_DATABASE}'
+      MYSQL_USER: '${DB_USERNAME}'
+      MYSQL_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+    expose:
+      - 3306
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./data/import:/docker-entrypoint-initdb.d
+    networks:
+      - standardnotes_self_hosted
+
+  cache:
+    image: redis:6.0-alpine
+    container_name: cache_self_hosted
+    volumes:
+      - ./data/redis/:/data
+    expose:
+      - 6379
+    restart: unless-stopped
+    networks:
+      - standardnotes_self_hosted
+  
+  standardnotes-web:
+    image: standardnotes/web:latest
+    container_name: standardnotes-web
+    build: ./node_modules/standardnotes-app
+    logging:
+        driver: "json-file"
+        options:
+            max-file: 5
+            max-size: 10m
+    ports:
+      - 3001:80
+    depends_on:
+      - server
+    env_file: .web-app.env
+    environment:
+      PORT: 3001
+    restart: unless-stopped
+    networks:
+      - standardnotes_self_hosted
+
+networks:
+  standardnotes_self_hosted:
+    name: standardnotes_self_hosted

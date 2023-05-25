@@ -1,0 +1,51 @@
+diff --git a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/AccountMenu/GeneralAccountMenu.tsx b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/AccountMenu/GeneralAccountMenu.tsx
+index 0404629..fd78c89 100644
+--- a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/AccountMenu/GeneralAccountMenu.tsx
++++ b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/AccountMenu/GeneralAccountMenu.tsx
+@@ -66,18 +66,12 @@ const GeneralAccountMenu: FunctionComponent<Props> = ({
+     viewControllerManager.preferencesController.openPreferences()
+   }, [viewControllerManager])
+ 
+-  const openHelp = useCallback(() => {
+-    viewControllerManager.accountMenuController.closeAccountMenu()
+-    viewControllerManager.preferencesController.setCurrentPane('help-feedback')
+-    viewControllerManager.preferencesController.openPreferences()
+-  }, [viewControllerManager])
+-
+   const signOut = useCallback(() => {
+     viewControllerManager.accountMenuController.setSigningOut(true)
+   }, [viewControllerManager])
+ 
+   const activateRegisterPane = useCallback(() => {
+-    setMenuPane(AccountMenuPane.Register)
++      setMenuPane(AccountMenuPane.Register)
+   }, [setMenuPane])
+ 
+   const activateSignInPane = useCallback(() => {
+@@ -157,7 +151,7 @@ const GeneralAccountMenu: FunctionComponent<Props> = ({
+           <>
+             <MenuItem onClick={activateRegisterPane}>
+               <Icon type="user" className={iconClassName} />
+-              Create free account
++              Create account
+             </MenuItem>
+             <MenuItem onClick={activateSignInPane}>
+               <Icon type="signIn" className={iconClassName} />
+@@ -165,17 +159,6 @@ const GeneralAccountMenu: FunctionComponent<Props> = ({
+             </MenuItem>
+           </>
+         )}
+-        <MenuItem onClick={() => viewControllerManager.isImportModalVisible.set(true)}>
+-          <Icon type="archive" className={iconClassName} />
+-          Import
+-        </MenuItem>
+-        <MenuItem className="justify-between" onClick={openHelp}>
+-          <div className="flex items-center">
+-            <Icon type="help" className={iconClassName} />
+-            Help &amp; feedback
+-          </div>
+-          <span className="text-neutral">v{application.version}</span>
+-        </MenuItem>
+         {user ? (
+           <>
+             <MenuItemSeparator />

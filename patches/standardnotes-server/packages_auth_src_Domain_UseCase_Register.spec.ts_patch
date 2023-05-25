@@ -1,0 +1,13 @@
+diff --git a/node_modules/standardnotes-server/packages/auth/src/Domain/UseCase/Register.spec.ts b/node_modules/standardnotes-server/packages/auth/src/Domain/UseCase/Register.spec.ts
+index 2129633..c23d1b6 100644
+--- a/node_modules/standardnotes-server/packages/auth/src/Domain/UseCase/Register.spec.ts
++++ b/node_modules/standardnotes-server/packages/auth/src/Domain/UseCase/Register.spec.ts
+@@ -132,7 +132,7 @@ describe('Register', () => {
+       }),
+     ).toEqual({
+       success: false,
+-      errorMessage: 'This email is already registered.',
++      errorMessage: 'User registration is currently not allowed.',
+     })
+ 
+     expect(userRepository.save).not.toHaveBeenCalled()

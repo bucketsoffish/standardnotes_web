@@ -1,0 +1,15 @@
+diff --git a/node_modules/standardnotes-app/packages/web/src/javascripts/Constants/Constants.ts b/node_modules/standardnotes-app/packages/web/src/javascripts/Constants/Constants.ts
+index bf28cfb..27e2425 100644
+--- a/node_modules/standardnotes-app/packages/web/src/javascripts/Constants/Constants.ts
++++ b/node_modules/standardnotes-app/packages/web/src/javascripts/Constants/Constants.ts
+@@ -4,7 +4,9 @@ export const PANEL_NAME_NOTES = 'notes'
+ export const PANEL_NAME_NAVIGATION = 'navigation'
+ 
+ export const EMAIL_REGEX =
+-  /^([a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)$/
++  /^([a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*(?:@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)?)$/
++
++export const PASS_STRENGTH_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
+ 
+ export const MENU_MARGIN_FROM_APP_BORDER = 5
+ export const MAX_MENU_SIZE_MULTIPLIER = 30

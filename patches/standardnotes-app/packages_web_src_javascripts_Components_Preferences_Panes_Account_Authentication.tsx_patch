@@ -1,0 +1,24 @@
+diff --git a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/Account/Authentication.tsx b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/Account/Authentication.tsx
+index 8717f36..d90d378 100644
+--- a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/Account/Authentication.tsx
++++ b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/Account/Authentication.tsx
+@@ -25,7 +25,7 @@ const Authentication: FunctionComponent<Props> = ({ viewControllerManager }) =>
+     viewControllerManager.preferencesController.closePreferences()
+     viewControllerManager.accountMenuController.setCurrentPane(AccountMenuPane.Register)
+     viewControllerManager.accountMenuController.setShow(true)
+-  }
++}
+ 
+   return (
+     <PreferencesGroup>
+@@ -36,8 +36,8 @@ const Authentication: FunctionComponent<Props> = ({ viewControllerManager }) =>
+           <div className="mb-3 text-center text-base lg:text-sm">
+             Sign in to sync your notes and preferences across all your devices and enable end-to-end encryption.
+           </div>
+-          <Button primary label="Create free account" onClick={clickRegister} className="mb-3" />
+-          <div className="text-base lg:text-sm">
++          <Button primary label="Create account" onClick={clickRegister} className="mb-3" />
++          <div className="text-sm">
+             Already have an account?{' '}
+             <button className="cursor-pointer border-0 bg-default p-0 text-info underline" onClick={clickSignIn}>
+               Sign in

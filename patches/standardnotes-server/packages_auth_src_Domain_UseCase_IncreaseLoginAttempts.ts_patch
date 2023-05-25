@@ -1,0 +1,21 @@
+diff --git a/node_modules/standardnotes-server/packages/auth/src/Domain/UseCase/IncreaseLoginAttempts.ts b/node_modules/standardnotes-server/packages/auth/src/Domain/UseCase/IncreaseLoginAttempts.ts
+index 96b8015..4443b8a 100644
+--- a/node_modules/standardnotes-server/packages/auth/src/Domain/UseCase/IncreaseLoginAttempts.ts
++++ b/node_modules/standardnotes-server/packages/auth/src/Domain/UseCase/IncreaseLoginAttempts.ts
+@@ -28,12 +28,13 @@ export class IncreaseLoginAttempts implements UseCaseInterface {
+ 
+     numberOfFailedAttempts += 1
+ 
+-    await this.lockRepository.updateLockCounter(identifier, numberOfFailedAttempts)
++    // await this.lockRepository.updateLockCounter(identifier, numberOfFailedAttempts)
+ 
+     if (numberOfFailedAttempts >= this.maxLoginAttempts) {
+-      this.logger.debug(`User ${identifier} breached number of allowed login attempts. Locking user.`)
++      // this.logger.debug(`User ${identifier} breached number of allowed login attempts. Locking user.`)
+ 
+-      await this.lockRepository.lockUser(identifier)
++      // await this.lockRepository.lockUser(identifier)
++      this.logger.debug(`User ${identifier} exceeded default number of allowed login attempts. Ignoring locking user's account.`)
+     }
+ 
+     return { success: true }

@@ -1,0 +1,24 @@
+diff --git a/node_modules/standardnotes-app/packages/web/src/stylesheets/_menus.scss b/node_modules/standardnotes-app/packages/web/src/stylesheets/_menus.scss
+index f4278c5..3487abb 100644
+--- a/node_modules/standardnotes-app/packages/web/src/stylesheets/_menus.scss
++++ b/node_modules/standardnotes-app/packages/web/src/stylesheets/_menus.scss
+@@ -16,3 +16,18 @@
+   width: 280px;
+   max-height: calc(85vh - 90px);
+ }
++
++.fullscreen-mode-parent {
++  // max-width: 100% !important;
++  transform: unset !important;
++  max-width: unset !important;
++  max-height: unset !important;
++  width: 100% !important;
++  height: 100% !important;
++}
++
++.fullscreen-mode {
++  width: 50%;
++  margin: auto;
++  margin-top: 200px;
++}
+\ No newline at end of file

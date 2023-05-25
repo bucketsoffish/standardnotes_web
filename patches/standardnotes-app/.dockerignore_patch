@@ -1,0 +1,20 @@
+diff --git a/node_modules/standardnotes-app/.dockerignore b/node_modules/standardnotes-app/.dockerignore
+new file mode 100644
+index 0000000..75e5b59
+--- /dev/null
++++ b/node_modules/standardnotes-app/.dockerignore
+@@ -0,0 +1,13 @@
++dist
++coverage
++
++.yarn/*
++!.yarn/cache
++!.yarn/patches
++!.yarn/plugins
++!.yarn/releases
++!.yarn/unplugged
++!.yarn/sdks
++!.yarn/versions
++
++data/*
+\ No newline at end of file

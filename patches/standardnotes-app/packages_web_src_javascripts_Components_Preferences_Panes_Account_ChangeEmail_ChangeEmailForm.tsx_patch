@@ -1,0 +1,13 @@
+diff --git a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/Account/ChangeEmail/ChangeEmailForm.tsx b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/Account/ChangeEmail/ChangeEmailForm.tsx
+index 9b01a19..77b625f 100644
+--- a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/Account/ChangeEmail/ChangeEmailForm.tsx
++++ b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/Account/ChangeEmail/ChangeEmailForm.tsx
+@@ -14,7 +14,7 @@ const ChangeEmailForm: FunctionComponent<Props> = ({ setNewEmail, setCurrentPass
+     <div className="flex w-full flex-col">
+       <div className="mb-3">
+         <label className={labelClassName} htmlFor="change-email-email-input">
+-          New Email:
++          New Username:
+         </label>
+         <DecoratedInput
+           type="email"

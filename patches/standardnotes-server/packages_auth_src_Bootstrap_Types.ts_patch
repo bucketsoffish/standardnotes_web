@@ -1,0 +1,12 @@
+diff --git a/node_modules/standardnotes-server/packages/auth/src/Bootstrap/Types.ts b/node_modules/standardnotes-server/packages/auth/src/Bootstrap/Types.ts
+index f2a93a0..a718a64 100644
+--- a/node_modules/standardnotes-server/packages/auth/src/Bootstrap/Types.ts
++++ b/node_modules/standardnotes-server/packages/auth/src/Bootstrap/Types.ts
+@@ -81,6 +81,7 @@ const TYPES = {
+   PSEUDO_KEY_PARAMS_KEY: Symbol.for('PSEUDO_KEY_PARAMS_KEY'),
+   REDIS_URL: Symbol.for('REDIS_URL'),
+   DISABLE_USER_REGISTRATION: Symbol.for('DISABLE_USER_REGISTRATION'),
++  REGISTRATION_TOKEN: Symbol.for('REGISTRATION_TOKEN'),
+   SNS_TOPIC_ARN: Symbol.for('SNS_TOPIC_ARN'),
+   SNS_AWS_REGION: Symbol.for('SNS_AWS_REGION'),
+   SQS_QUEUE_URL: Symbol.for('SQS_QUEUE_URL'),

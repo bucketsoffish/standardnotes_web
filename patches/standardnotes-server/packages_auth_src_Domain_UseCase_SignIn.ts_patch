@@ -1,0 +1,56 @@
+diff --git a/node_modules/standardnotes-server/packages/auth/src/Domain/UseCase/SignIn.ts b/node_modules/standardnotes-server/packages/auth/src/Domain/UseCase/SignIn.ts
+index bb71be9..24045dd 100644
+--- a/node_modules/standardnotes-server/packages/auth/src/Domain/UseCase/SignIn.ts
++++ b/node_modules/standardnotes-server/packages/auth/src/Domain/UseCase/SignIn.ts
+@@ -20,6 +20,18 @@ import { HttpStatusCode } from '@standardnotes/responses'
+ import { EmailLevel } from '@standardnotes/domain-core'
+ import { getBody, getSubject } from '../Email/UserSignedIn'
+ 
++function sleepRandom(): Promise<void> {
++  const min = 1950;
++  const max = 2000;
++  const randomDelay = Math.floor(Math.random() * (max - min + 1)) + min;
++
++  return new Promise((resolve) => {
++      setTimeout(() => {
++          resolve();
++      }, randomDelay);
++  });
++}
++
+ @injectable()
+ export class SignIn implements UseCaseInterface {
+   constructor(
+@@ -43,19 +55,19 @@ export class SignIn implements UseCaseInterface {
+ 
+         return {
+           success: false,
+-          errorMessage: 'Invalid email or password',
++          errorMessage: 'Invalid username or password',
+         }
+       }
+     }
+ 
+     const user = await this.userRepository.findOneByEmail(dto.email)
+-
++    await sleepRandom();
+     if (!user) {
+-      this.logger.debug(`User with email ${dto.email} was not found`)
++      this.logger.debug(`User with username ${dto.email} was not found`)
+ 
+       return {
+         success: false,
+-        errorMessage: 'Invalid email or password',
++        errorMessage: 'Invalid username or password',
+       }
+     }
+ 
+@@ -78,7 +90,7 @@ export class SignIn implements UseCaseInterface {
+ 
+       return {
+         success: false,
+-        errorMessage: 'Invalid email or password',
++        errorMessage: 'Invalid username or password',
+       }
+     }
+ 

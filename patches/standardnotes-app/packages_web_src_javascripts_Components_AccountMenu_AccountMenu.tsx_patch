@@ -1,0 +1,13 @@
+diff --git a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/AccountMenu/AccountMenu.tsx b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/AccountMenu/AccountMenu.tsx
+index 4f44a96..862fbab 100644
+--- a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/AccountMenu/AccountMenu.tsx
++++ b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/AccountMenu/AccountMenu.tsx
+@@ -49,7 +49,7 @@ const AccountMenu: FunctionComponent<AccountMenuProps> = ({
+   )
+ 
+   return (
+-    <div id="account-menu" className="sn-component" onKeyDown={handleKeyDown}>
++    <div id="account-menu" className={(application.getUser() === undefined || application.getIsRegistering()) ? "sn-component fullscreen-mode" : "sn-component"} onKeyDown={handleKeyDown}>
+       <MenuPaneSelector
+         viewControllerManager={viewControllerManager}
+         application={application}

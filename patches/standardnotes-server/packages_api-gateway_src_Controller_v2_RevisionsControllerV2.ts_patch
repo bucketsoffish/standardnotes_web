@@ -1,0 +1,36 @@
+diff --git a/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v2/RevisionsControllerV2.ts b/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v2/RevisionsControllerV2.ts
+index 31df756..ea23222 100644
+--- a/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v2/RevisionsControllerV2.ts
++++ b/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v2/RevisionsControllerV2.ts
+@@ -4,8 +4,10 @@ import { BaseHttpController, controller, httpDelete, httpGet } from 'inversify-e
+ 
+ import TYPES from '../../Bootstrap/Types'
+ import { HttpServiceInterface } from '../../Service/Http/HttpServiceInterface'
++import { param } from "express-validator";
++import { Validators } from '../Validators'
+ 
+-@controller('/v2/items/:itemUuid/revisions', TYPES.AuthMiddleware)
++@controller('/v2/items/:itemUuid/revisions', TYPES.AuthMiddleware, param("itemUuid").custom(uuid => { return Validators.isUUID(uuid); }), TYPES.RequestValidator)
+ export class RevisionsControllerV2 extends BaseHttpController {
+   constructor(@inject(TYPES.HTTPService) private httpService: HttpServiceInterface) {
+     super()
+@@ -16,7 +18,8 @@ export class RevisionsControllerV2 extends BaseHttpController {
+     await this.httpService.callRevisionsServer(request, response, `items/${request.params.itemUuid}/revisions`)
+   }
+ 
+-  @httpGet('/:id')
++  @httpGet('/:id', param("itemUuid").custom(uuid => { return Validators.isUUID(uuid); }),
++    param("id").custom(uuid => { return Validators.isUUID(uuid); }), TYPES.RequestValidator)
+   async getRevision(request: Request, response: Response): Promise<void> {
+     await this.httpService.callRevisionsServer(
+       request,
+@@ -25,7 +28,8 @@ export class RevisionsControllerV2 extends BaseHttpController {
+     )
+   }
+ 
+-  @httpDelete('/:id')
++  @httpDelete('/:id', param("itemUuid").custom(uuid => { return Validators.isUUID(uuid); }),
++    param("id").custom(uuid => { return Validators.isUUID(uuid); }), TYPES.RequestValidator)
+   async deleteRevision(request: Request, response: Response): Promise<void> {
+     await this.httpService.callRevisionsServer(
+       request,

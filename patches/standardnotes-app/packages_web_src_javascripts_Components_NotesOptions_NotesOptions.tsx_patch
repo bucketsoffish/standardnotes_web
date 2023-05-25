@@ -1,0 +1,21 @@
+diff --git a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/NotesOptions/NotesOptions.tsx b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/NotesOptions/NotesOptions.tsx
+index b6a89b0..22b0a83 100644
+--- a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/NotesOptions/NotesOptions.tsx
++++ b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/NotesOptions/NotesOptions.tsx
+@@ -10,7 +10,6 @@ import {
+   SUPER_SHOW_MARKDOWN_PREVIEW,
+ } from '@standardnotes/ui-services'
+ import ChangeEditorOption from './ChangeEditorOption'
+-import ListedActionsOption from './Listed/ListedActionsOption'
+ import AddTagOption from './AddTagOption'
+ import { addToast, dismissToast, ToastType } from '@standardnotes/toast'
+ import { NotesOptionsProps } from './NotesOptionsProps'
+@@ -379,8 +378,6 @@ const NotesOptions = ({
+           )}
+           <HorizontalSeparator classes="my-2" />
+ 
+-          <ListedActionsOption iconClassName={iconClass} application={application} note={notes[0]} />
+-
+           <HorizontalSeparator classes="my-2" />
+ 
+           <SpellcheckOptions editorForNote={editorForNote} notesController={notesController} note={notes[0]} />

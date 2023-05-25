@@ -1,0 +1,48 @@
+{
+  "name": "standardnotes_web_patcher",
+  "version": "1.0.0",
+  "private": true,
+  "engines" : { 
+    "npm" : ">=6.0.0 <9.0.0",
+    "node" : ">=14.0.0 <19.0.0"
+  },
+  "scripts": {
+    "add-files-subscription": "node scripts/add_subscriptions.js",
+    "dev-setup": "yarn install --ignore-engines",
+    "build": "docker compose build",
+    "prod-build": "docker compose build && node scripts/docker_save_images.js",
+    "build-start-detached": "docker compose up -d --build",
+    "start": "docker compose start",
+    "start-detached": "docker compose up -d",
+    "stop": "docker compose stop",
+    "logs": "docker compose logs --follow",
+    "patch-package": "run-script-os",
+    "patch-package:windows": "patch-package --exclude \"(^.idea|^.git|^package.json|^config.json|^lib/|dist/|^package-lock.json|^webapp/|^src/modules.ts|^.yarn*)\"",
+    "patch-package:default": "patch-package --exclude \"(^.idea|^.git|^package.json|^config.json|^lib/|dist/|^package-lock.json|^webapp/|^src/modules.ts|^.yarn*)\"",
+    "preinstall": "node scripts/preinstall-wrapper.js",
+    "postinstall": "node scripts/combine-patch-files.js && patch-package --error-on-fail && rimraf patches/*.patch",
+    "clean": "yarn cache clean && node scripts/remove_paths.js target node_modules yarn.lock yarn-error.log",
+    "clean-install": "yarn clean && yarn dev-setup",
+    "make-patch": "yarn patch-package standardnotes-app standardnotes-server && node scripts/split-patch-files.js",
+    "standardnotes-versions": "node scripts/list-monorepo-versions.js standardnotes-app standardnotes-server"
+  },
+  "dependencies": {
+    "standardnotes-app": "github:standardnotes/app.git#0196b69a8b89b18c83dfa788259dd07390366412",
+    "standardnotes-server": "file:./work/standardnotes-server",
+    "patch-package": "^6.4.7",
+    "postinstall-postinstall": "^2.1.0"
+  },
+  "resolutions": {
+    "klaw-sync": "github:yulongge/node-klaw-sync#v2.1.0",
+    "@standardnotes/snjs": "2.164.0"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2",
+    "run-script-os": "^1.1.6",
+    "symlink-dir": "^5.1.0",
+    "fs-extra": "*"
+  },
+  "pre-install-depends": {
+    "sn-server": "https://github.com/standardnotes/server/archive/7e989720bfa907135cad9abb0e950a35111853ec.zip"
+  }
+}

@@ -1,0 +1,59 @@
+diff --git a/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v1/PaymentsController.ts b/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v1/PaymentsController.ts
+index b586023..14c5957 100644
+--- a/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v1/PaymentsController.ts
++++ b/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v1/PaymentsController.ts
+@@ -3,6 +3,8 @@ import { inject } from 'inversify'
+ import { all, BaseHttpController, controller, httpDelete, httpGet, httpPost } from 'inversify-express-utils'
+ import TYPES from '../../Bootstrap/Types'
+ import { HttpServiceInterface } from '../../Service/Http/HttpServiceInterface'
++import { param } from "express-validator";
++import { Validators } from '../Validators'
+ 
+ @controller('/v1')
+ export class PaymentsController extends BaseHttpController {
+@@ -90,7 +92,7 @@ export class PaymentsController extends BaseHttpController {
+     await this.httpService.callPaymentsServer(request, response, 'api/students', request.body)
+   }
+ 
+-  @httpPost('/students/:token/approve')
++  @httpPost('/students/:token/approve', param("token").custom(str => { return Validators.isAlphaNumeric(str); }), TYPES.RequestValidator)
+   async studentsApprove(request: Request, response: Response): Promise<void> {
+     await this.httpService.callPaymentsServer(
+       request,
+@@ -100,7 +102,7 @@ export class PaymentsController extends BaseHttpController {
+     )
+   }
+ 
+-  @httpPost('/email_subscriptions/:token/less')
++  @httpPost('/email_subscriptions/:token/less', param("token").custom(str => { return Validators.isAlphaNumeric(str); }), TYPES.RequestValidator)
+   async subscriptionsLess(request: Request, response: Response): Promise<void> {
+     await this.httpService.callPaymentsServer(
+       request,
+@@ -110,7 +112,7 @@ export class PaymentsController extends BaseHttpController {
+     )
+   }
+ 
+-  @httpPost('/email_subscriptions/:token/more')
++  @httpPost('/email_subscriptions/:token/more', param("token").custom(str => { return Validators.isAlphaNumeric(str); }), TYPES.RequestValidator)
+   async subscriptionsMore(request: Request, response: Response): Promise<void> {
+     await this.httpService.callPaymentsServer(
+       request,
+@@ -120,7 +122,8 @@ export class PaymentsController extends BaseHttpController {
+     )
+   }
+ 
+-  @httpPost('/email_subscriptions/:token/mute/:campaignId')
++  @httpPost('/email_subscriptions/:token/mute/:campaignId', param("token").custom(str => { return Validators.isAlphaNumeric(str); }),
++    param("campaignId").custom(uuid => { return Validators.isUUID(uuid); }), TYPES.RequestValidator)
+   async subscriptionsMute(request: Request, response: Response): Promise<void> {
+     await this.httpService.callPaymentsServer(
+       request,
+@@ -130,7 +133,7 @@ export class PaymentsController extends BaseHttpController {
+     )
+   }
+ 
+-  @httpPost('/email_subscriptions/:token/unsubscribe')
++  @httpPost('/email_subscriptions/:token/unsubscribe', param("token").custom(str => { return Validators.isAlphaNumeric(str); }), TYPES.RequestValidator)
+   async subscriptionsUnsubscribe(request: Request, response: Response): Promise<void> {
+     await this.httpService.callPaymentsServer(
+       request,

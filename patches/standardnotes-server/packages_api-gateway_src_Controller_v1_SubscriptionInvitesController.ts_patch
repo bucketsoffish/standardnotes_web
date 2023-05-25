@@ -1,0 +1,28 @@
+diff --git a/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v1/SubscriptionInvitesController.ts b/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v1/SubscriptionInvitesController.ts
+index 959e2d0..18be574 100644
+--- a/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v1/SubscriptionInvitesController.ts
++++ b/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v1/SubscriptionInvitesController.ts
+@@ -4,6 +4,8 @@ import { BaseHttpController, controller, httpDelete, httpGet, httpPost } from 'i
+ 
+ import TYPES from '../../Bootstrap/Types'
+ import { HttpServiceInterface } from '../../Service/Http/HttpServiceInterface'
++import { param } from "express-validator";
++import { Validators } from '../Validators'
+ 
+ @controller('/v1/subscription-invites')
+ export class SubscriptionInvitesController extends BaseHttpController {
+@@ -21,12 +23,12 @@ export class SubscriptionInvitesController extends BaseHttpController {
+     await this.httpService.callAuthServer(request, response, 'subscription-invites', request.body)
+   }
+ 
+-  @httpDelete('/:inviteUuid', TYPES.AuthMiddleware)
++  @httpDelete('/:inviteUuid', TYPES.AuthMiddleware, param("inviteUuid").custom(uuid => { return Validators.isUUID(uuid); }), TYPES.RequestValidator)
+   async cancelSubscriptionSharing(request: Request, response: Response): Promise<void> {
+     await this.httpService.callAuthServer(request, response, `subscription-invites/${request.params.inviteUuid}`)
+   }
+ 
+-  @httpPost('/:inviteUuid/accept', TYPES.AuthMiddleware)
++  @httpPost('/:inviteUuid/accept', TYPES.AuthMiddleware, param("inviteUuid").custom(uuid => { return Validators.isUUID(uuid); }), TYPES.RequestValidator)
+   async acceptInvite(request: Request, response: Response): Promise<void> {
+     await this.httpService.callAuthServer(request, response, `subscription-invites/${request.params.inviteUuid}/accept`)
+   }

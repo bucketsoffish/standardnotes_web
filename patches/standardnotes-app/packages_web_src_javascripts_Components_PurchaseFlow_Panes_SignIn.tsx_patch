@@ -1,0 +1,22 @@
+diff --git a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/PurchaseFlow/Panes/SignIn.tsx b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/PurchaseFlow/Panes/SignIn.tsx
+index 4f3296d..db5b9ec 100644
+--- a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/PurchaseFlow/Panes/SignIn.tsx
++++ b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/PurchaseFlow/Panes/SignIn.tsx
+@@ -110,7 +110,7 @@ const SignIn: FunctionComponent<Props> = ({ viewControllerManager, application }
+               className={`min-w-auto sm:min-w-90 ${isEmailInvalid && !otherErrorMessage ? 'mb-2' : 'mb-4'}`}
+               id="purchase-sign-in-email"
+               type="email"
+-              label="Email"
++              label="Username"
+               value={email}
+               onChange={handleEmailChange}
+               ref={emailInputRef}
+@@ -118,7 +118,7 @@ const SignIn: FunctionComponent<Props> = ({ viewControllerManager, application }
+               isInvalid={isEmailInvalid}
+             />
+             {isEmailInvalid && !otherErrorMessage ? (
+-              <div className="mb-4 text-danger">Please provide a valid email.</div>
++              <div className="mb-4 text-danger">Please provide a valid username.</div>
+             ) : null}
+             <FloatingLabelInput
+               className={`min-w-auto sm:min-w-90 ${otherErrorMessage ? 'mb-2' : 'mb-4'}`}

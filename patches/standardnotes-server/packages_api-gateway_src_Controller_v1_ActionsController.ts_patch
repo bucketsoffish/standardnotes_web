@@ -1,0 +1,22 @@
+diff --git a/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v1/ActionsController.ts b/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v1/ActionsController.ts
+index a406c0a..bf3057d 100644
+--- a/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v1/ActionsController.ts
++++ b/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v1/ActionsController.ts
+@@ -3,6 +3,8 @@ import { inject } from 'inversify'
+ import { BaseHttpController, controller, httpGet, httpPost } from 'inversify-express-utils'
+ import TYPES from '../../Bootstrap/Types'
+ import { HttpServiceInterface } from '../../Service/Http/HttpServiceInterface'
++import { param } from "express-validator";
++import { Validators } from '../Validators'
+ 
+ @controller('/v1')
+ export class ActionsController extends BaseHttpController {
+@@ -30,7 +32,7 @@ export class ActionsController extends BaseHttpController {
+     await this.httpService.callAuthServer(request, response, 'auth/methods', request.body)
+   }
+ 
+-  @httpGet('/unsubscribe/:token')
++  @httpGet('/unsubscribe/:token', param("token").custom(str => { return Validators.isAlphaNumeric(str); }), TYPES.RequestValidator)
+   async emailUnsubscribe(request: Request, response: Response): Promise<void> {
+     await this.httpService.callEmailServer(
+       request,

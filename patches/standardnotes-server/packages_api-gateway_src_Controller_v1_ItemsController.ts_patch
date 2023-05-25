@@ -1,0 +1,22 @@
+diff --git a/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v1/ItemsController.ts b/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v1/ItemsController.ts
+index 67ffddb..bf7499d 100644
+--- a/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v1/ItemsController.ts
++++ b/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v1/ItemsController.ts
+@@ -3,6 +3,8 @@ import { inject } from 'inversify'
+ import { BaseHttpController, controller, httpGet, httpPost } from 'inversify-express-utils'
+ import TYPES from '../../Bootstrap/Types'
+ import { HttpServiceInterface } from '../../Service/Http/HttpServiceInterface'
++import { param } from "express-validator";
++import { Validators } from '../Validators'
+ 
+ @controller('/v1/items', TYPES.AuthMiddleware)
+ export class ItemsController extends BaseHttpController {
+@@ -20,7 +22,7 @@ export class ItemsController extends BaseHttpController {
+     await this.httpService.callSyncingServer(request, response, 'items/check-integrity', request.body)
+   }
+ 
+-  @httpGet('/:uuid')
++  @httpGet('/:uuid', param("uuid").custom(uuid => { return Validators.isUUID(uuid); }), TYPES.RequestValidator)
+   async getItem(request: Request, response: Response): Promise<void> {
+     await this.httpService.callSyncingServer(request, response, `items/${request.params.uuid}`, request.body)
+   }

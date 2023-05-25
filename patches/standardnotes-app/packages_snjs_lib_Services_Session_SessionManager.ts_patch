@@ -1,0 +1,34 @@
+diff --git a/node_modules/standardnotes-app/packages/snjs/lib/Services/Session/SessionManager.ts b/node_modules/standardnotes-app/packages/snjs/lib/Services/Session/SessionManager.ts
+index 8e5a9a5..5ad0b29 100644
+--- a/node_modules/standardnotes-app/packages/snjs/lib/Services/Session/SessionManager.ts
++++ b/node_modules/standardnotes-app/packages/snjs/lib/Services/Session/SessionManager.ts
+@@ -65,7 +65,7 @@ import {
+   UserRegistrationResponseBody,
+ } from '@standardnotes/api'
+ 
+-export const MINIMUM_PASSWORD_LENGTH = 8
++export const MINIMUM_PASSWORD_LENGTH = 12
+ export const MissingAccountParams = 'missing-params'
+ 
+ const cleanedEmailString = (email: string) => {
+@@ -350,8 +350,9 @@ export class SNSessionManager
+     return undefined
+   }
+ 
+-  async register(email: string, password: string, ephemeral: boolean): Promise<UserRegistrationResponseBody> {
+-    if (password.length < MINIMUM_PASSWORD_LENGTH) {
++  async register(email: string, password: string, regToken: string, ephemeral: boolean): Promise<UserRegistrationResponseBody> {
++    const PASS_STRENGTH_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
++    if (password.length < MINIMUM_PASSWORD_LENGTH ||!PASS_STRENGTH_REGEX.test(password)) {
+       throw new ApiCallError(
+         ErrorMessage.InsufficientPasswordMessage.replace('%LENGTH%', MINIMUM_PASSWORD_LENGTH.toString()),
+       )
+@@ -368,7 +369,7 @@ export class SNSessionManager
+     const serverPassword = rootKey.serverPassword as string
+     const keyParams = rootKey.keyParams
+ 
+-    const registerResponse = await this.userApiService.register({ email, serverPassword, keyParams, ephemeral })
++    const registerResponse = await this.userApiService.register({email, serverPassword, regToken, keyParams, ephemeral})
+ 
+     if ('error' in registerResponse.data) {
+       throw new ApiCallError(registerResponse.data.error.message)

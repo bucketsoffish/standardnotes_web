@@ -1,0 +1,12 @@
+diff --git a/node_modules/standardnotes-server/packages/api-gateway/src/Bootstrap/Types.ts b/node_modules/standardnotes-server/packages/api-gateway/src/Bootstrap/Types.ts
+index e9e264d..38b635d 100644
+--- a/node_modules/standardnotes-server/packages/api-gateway/src/Bootstrap/Types.ts
++++ b/node_modules/standardnotes-server/packages/api-gateway/src/Bootstrap/Types.ts
+@@ -16,6 +16,7 @@ const TYPES = {
+   CROSS_SERVICE_TOKEN_CACHE_TTL: Symbol.for('CROSS_SERVICE_TOKEN_CACHE_TTL'),
+   // Middleware
+   AuthMiddleware: Symbol.for('AuthMiddleware'),
++  RequestValidator: Symbol.for('RequestValidator'),
+   WebSocketAuthMiddleware: Symbol.for('WebSocketAuthMiddleware'),
+   SubscriptionTokenAuthMiddleware: Symbol.for('SubscriptionTokenAuthMiddleware'),
+   // Services

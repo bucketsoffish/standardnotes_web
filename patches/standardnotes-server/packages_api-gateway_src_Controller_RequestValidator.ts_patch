@@ -1,0 +1,30 @@
+diff --git a/node_modules/standardnotes-server/packages/api-gateway/src/Controller/RequestValidator.ts b/node_modules/standardnotes-server/packages/api-gateway/src/Controller/RequestValidator.ts
+new file mode 100644
+index 0000000..e105a88
+--- /dev/null
++++ b/node_modules/standardnotes-server/packages/api-gateway/src/Controller/RequestValidator.ts
+@@ -0,0 +1,23 @@
++import {validationResult} from "express-validator";
++import { NextFunction, Request, Response } from 'express'
++import { injectable } from 'inversify'
++import { BaseMiddleware } from 'inversify-express-utils'
++
++@injectable()
++export class RequestValidator extends BaseMiddleware {
++    constructor(
++      ) {
++        super()
++      }
++
++    async handler(request: Request, response: Response, next: NextFunction): Promise<void> {
++        const validationErrors = validationResult(request);
++
++        if (!validationErrors.isEmpty()) {
++          response.status(422).send({errors: validationErrors.array()});
++          return;
++        }
++
++        return next();
++    }
++}
+\ No newline at end of file

@@ -1,0 +1,40 @@
+diff --git a/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v2/PaymentsControllerV2.ts b/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v2/PaymentsControllerV2.ts
+index 6e3c072..4499a3d 100644
+--- a/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v2/PaymentsControllerV2.ts
++++ b/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v2/PaymentsControllerV2.ts
+@@ -3,6 +3,8 @@ import { BaseHttpController, controller, httpDelete, httpGet, httpPatch, httpPos
+ import { inject } from 'inversify'
+ import TYPES from '../../Bootstrap/Types'
+ import { HttpServiceInterface } from '../../Service/Http/HttpServiceInterface'
++import { param } from "express-validator";
++import { Validators } from '../Validators'
+ 
+ @controller('/v2')
+ export class PaymentsControllerV2 extends BaseHttpController {
+@@ -30,7 +32,7 @@ export class PaymentsControllerV2 extends BaseHttpController {
+     await this.httpService.callPaymentsServer(request, response, 'api/subscriptions/deltas/apply', request.body)
+   }
+ 
+-  @httpGet('/subscriptions/:subscriptionId', TYPES.SubscriptionTokenAuthMiddleware)
++  @httpGet('/subscriptions/:subscriptionId', TYPES.SubscriptionTokenAuthMiddleware, param("subscriptionId").custom(uuid => { return Validators.isUUID(uuid); }), TYPES.RequestValidator)
+   async getSubscription(request: Request, response: Response): Promise<void> {
+     await this.httpService.callPaymentsServer(
+       request,
+@@ -40,7 +42,7 @@ export class PaymentsControllerV2 extends BaseHttpController {
+     )
+   }
+ 
+-  @httpDelete('/subscriptions/:subscriptionId', TYPES.SubscriptionTokenAuthMiddleware)
++  @httpDelete('/subscriptions/:subscriptionId', TYPES.SubscriptionTokenAuthMiddleware, param("subscriptionId").custom(uuid => { return Validators.isUUID(uuid); }), TYPES.RequestValidator)
+   async cancelSubscription(request: Request, response: Response): Promise<void> {
+     await this.httpService.callPaymentsServer(
+       request,
+@@ -50,7 +52,7 @@ export class PaymentsControllerV2 extends BaseHttpController {
+     )
+   }
+ 
+-  @httpPatch('/subscriptions/:subscriptionId', TYPES.SubscriptionTokenAuthMiddleware)
++  @httpPatch('/subscriptions/:subscriptionId', TYPES.SubscriptionTokenAuthMiddleware, param("subscriptionId").custom(uuid => { return Validators.isUUID(uuid); }), TYPES.RequestValidator)
+   async updateSubscription(request: Request, response: Response): Promise<void> {
+     await this.httpService.callPaymentsServer(
+       request,

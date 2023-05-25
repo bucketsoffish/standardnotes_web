@@ -1,0 +1,10 @@
+diff --git a/node_modules/standardnotes-server/packages/auth/src/Domain/UseCase/RegisterDTO.ts b/node_modules/standardnotes-server/packages/auth/src/Domain/UseCase/RegisterDTO.ts
+index 85bc127..93aba36 100644
+--- a/node_modules/standardnotes-server/packages/auth/src/Domain/UseCase/RegisterDTO.ts
++++ b/node_modules/standardnotes-server/packages/auth/src/Domain/UseCase/RegisterDTO.ts
+@@ -10,4 +10,5 @@ export type RegisterDTO = {
+   kpOrigination?: string
+   kpCreated?: string
+   version?: string
++  regToken?: string
+ }

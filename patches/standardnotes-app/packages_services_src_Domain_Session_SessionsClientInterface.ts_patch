@@ -1,0 +1,13 @@
+diff --git a/node_modules/standardnotes-app/packages/services/src/Domain/Session/SessionsClientInterface.ts b/node_modules/standardnotes-app/packages/services/src/Domain/Session/SessionsClientInterface.ts
+index b7303fb..b353c05 100644
+--- a/node_modules/standardnotes-app/packages/services/src/Domain/Session/SessionsClientInterface.ts
++++ b/node_modules/standardnotes-app/packages/services/src/Domain/Session/SessionsClientInterface.ts
+@@ -11,7 +11,7 @@ export interface SessionsClientInterface {
+   populateSessionFromDemoShareToken(token: Base64String): Promise<void>
+   getUser(): User | undefined
+   isCurrentSessionReadOnly(): boolean | undefined
+-  register(email: string, password: string, ephemeral: boolean): Promise<UserRegistrationResponseBody>
++  register(email: string, password: string, regToken: string, ephemeral: boolean): Promise<UserRegistrationResponseBody>
+   signIn(
+     email: string,
+     password: string,

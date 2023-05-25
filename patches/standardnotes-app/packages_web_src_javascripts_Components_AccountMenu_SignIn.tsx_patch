@@ -1,0 +1,94 @@
+diff --git a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/AccountMenu/SignIn.tsx b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/AccountMenu/SignIn.tsx
+index 282d9c4..756690d 100644
+--- a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/AccountMenu/SignIn.tsx
++++ b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/AccountMenu/SignIn.tsx
+@@ -9,8 +9,6 @@ import Checkbox from '@/Components/Checkbox/Checkbox'
+ import DecoratedInput from '@/Components/Input/DecoratedInput'
+ import DecoratedPasswordInput from '@/Components/Input/DecoratedPasswordInput'
+ import Icon from '@/Components/Icon/Icon'
+-import IconButton from '@/Components/Button/IconButton'
+-import AdvancedOptions from './AdvancedOptions'
+ import HorizontalSeparator from '../Shared/HorizontalSeparator'
+ import { isErrorResponse } from '@standardnotes/snjs'
+ 
+@@ -19,7 +17,7 @@ type Props = {
+   application: WebApplication
+   setMenuPane: (pane: AccountMenuPane) => void
+ }
+-
++//ts-ignore
+ const SignInPane: FunctionComponent<Props> = ({ application, viewControllerManager, setMenuPane }) => {
+   const { notesAndTagsCount } = viewControllerManager.accountMenuController
+   const [email, setEmail] = useState('')
+@@ -71,7 +69,7 @@ const SignInPane: FunctionComponent<Props> = ({ application, viewControllerManag
+   const handleEphemeralChange = useCallback(() => {
+     setIsEphemeral(!isEphemeral)
+   }, [isEphemeral])
+-
++  // @ts-ignore
+   const handleStrictSigninChange = useCallback(() => {
+     setIsStrictSignin(!isStrictSignin)
+   }, [isStrictSignin])
+@@ -152,6 +150,12 @@ const SignInPane: FunctionComponent<Props> = ({ application, viewControllerManag
+     [setEmail],
+   )
+ 
++  const clickRegister = useCallback(() => {
++    setMenuPane(AccountMenuPane.Register)
++    setEmail('')
++    setPassword('')
++  }, [setEmail, setMenuPane, setPassword])
++  
+   const handleSignInFormSubmit = useCallback(
+     (e: React.SyntheticEvent) => {
+       e.preventDefault()
+@@ -188,22 +192,15 @@ const SignInPane: FunctionComponent<Props> = ({ application, viewControllerManag
+   return (
+     <>
+       <div className="mt-1 mb-3 flex items-center px-3">
+-        <IconButton
+-          icon="arrow-left"
+-          title="Go back"
+-          className="mr-2 flex p-0 text-neutral"
+-          onClick={() => setMenuPane(AccountMenuPane.GeneralMenu)}
+-          focusable={true}
+-          disabled={isSigningIn}
+-        />
++        
+         <div className="text-base font-bold">Sign in</div>
+       </div>
+       <div className="mb-1 px-3">
+         <DecoratedInput
+           className={{ container: `mb-2 ${error ? 'border-danger' : null}` }}
+-          left={[<Icon type="email" className="text-neutral" />]}
++          left={[<Icon type="user" className="text-neutral" />]}
+           type="email"
+-          placeholder="Email"
++          placeholder="Username"
+           value={email}
+           onChange={handleEmailChange}
+           onFocus={resetInvalid}
+@@ -247,16 +244,14 @@ const SignInPane: FunctionComponent<Props> = ({ application, viewControllerManag
+             onChange={handleShouldMergeChange}
+           />
+         ) : null}
++        <HorizontalSeparator classes="my-2" />
++        <div className="text-sm">
++            Don't have an account?{' '}
++            <button className="cursor-pointer border-0 bg-default p-0 text-info underline" onClick={clickRegister}>
++              Create Account
++            </button>
++        </div>
+       </div>
+-      <HorizontalSeparator classes="my-2" />
+-      <AdvancedOptions
+-        viewControllerManager={viewControllerManager}
+-        application={application}
+-        disabled={isSigningIn}
+-        onPrivateUsernameModeChange={onPrivateUsernameChange}
+-        onStrictSignInChange={handleStrictSigninChange}
+-        onRecoveryCodesChange={onRecoveryCodesChange}
+-      />
+     </>
+   )
+ }

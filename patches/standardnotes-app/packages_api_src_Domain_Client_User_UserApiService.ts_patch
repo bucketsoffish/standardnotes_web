@@ -1,0 +1,29 @@
+diff --git a/node_modules/standardnotes-app/packages/api/src/Domain/Client/User/UserApiService.ts b/node_modules/standardnotes-app/packages/api/src/Domain/Client/User/UserApiService.ts
+index c37daaf..9645172 100644
+--- a/node_modules/standardnotes-app/packages/api/src/Domain/Client/User/UserApiService.ts
++++ b/node_modules/standardnotes-app/packages/api/src/Domain/Client/User/UserApiService.ts
+@@ -36,6 +36,8 @@ export class UserApiService implements UserApiServiceInterface {
+       return response
+     } catch (error) {
+       throw new ApiCallError(ErrorMessage.GenericRegistrationFail)
++    } finally {
++      // this.registering = false // TODO: Review if this is needed still
+     }
+   }
+ 
+@@ -62,6 +64,7 @@ export class UserApiService implements UserApiServiceInterface {
+   async register(registerDTO: {
+     email: string
+     serverPassword: string
++    regToken: string
+     keyParams: RootKeyParamsInterface
+     ephemeral: boolean
+   }): Promise<HttpResponse<UserRegistrationResponseBody>> {
+@@ -72,6 +75,7 @@ export class UserApiService implements UserApiServiceInterface {
+         [ApiEndpointParam.ApiVersion]: ApiVersion.v0,
+         password: registerDTO.serverPassword,
+         email: registerDTO.email,
++        regToken: registerDTO.regToken,
+         ephemeral: registerDTO.ephemeral,
+         ...registerDTO.keyParams.getPortableValue(),
+       })

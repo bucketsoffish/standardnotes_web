@@ -1,0 +1,12 @@
+diff --git a/node_modules/standardnotes-server/packages/auth/src/Controller/AuthController.ts b/node_modules/standardnotes-server/packages/auth/src/Controller/AuthController.ts
+index 800621d..5cfd2d3 100644
+--- a/node_modules/standardnotes-server/packages/auth/src/Controller/AuthController.ts
++++ b/node_modules/standardnotes-server/packages/auth/src/Controller/AuthController.ts
+@@ -64,6 +64,7 @@ export class AuthController implements UserServerInterface {
+       kpOrigination: params.origination,
+       kpCreated: params.created,
+       version: params.version,
++      regToken: params.regToken as string,
+     })
+ 
+     if (!registerResult.success) {

@@ -1,0 +1,12 @@
+diff --git a/node_modules/standardnotes-app/packages/web/src/javascripts/Controllers/QuickSettingsController.ts b/node_modules/standardnotes-app/packages/web/src/javascripts/Controllers/QuickSettingsController.ts
+index 99e989b..0b0de0e 100644
+--- a/node_modules/standardnotes-app/packages/web/src/javascripts/Controllers/QuickSettingsController.ts
++++ b/node_modules/standardnotes-app/packages/web/src/javascripts/Controllers/QuickSettingsController.ts
+@@ -42,6 +42,6 @@ export class QuickSettingsController extends AbstractViewController {
+     setTimeout(() => {
+       this.setOpen(false)
+       this.setShouldAnimateCloseMenu(false)
+-    }, 150)
++    }, 0)
+   }
+ }

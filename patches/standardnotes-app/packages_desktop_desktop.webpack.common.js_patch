@@ -1,0 +1,13 @@
+diff --git a/node_modules/standardnotes-app/packages/desktop/desktop.webpack.common.js b/node_modules/standardnotes-app/packages/desktop/desktop.webpack.common.js
+index 051126d..1f2e3f0 100644
+--- a/node_modules/standardnotes-app/packages/desktop/desktop.webpack.common.js
++++ b/node_modules/standardnotes-app/packages/desktop/desktop.webpack.common.js
+@@ -128,7 +128,7 @@ module.exports = function ({ onlyTranspileTypescript = false, experimentalFeatur
+     },
+     plugins: [
+       new webpack.DefinePlugin({
+-        DEFAULT_SYNC_SERVER: JSON.stringify(process.env.DEFAULT_SYNC_SERVER || 'https://api.standardnotes.com'),
++        DEFAULT_SYNC_SERVER: JSON.stringify(process.env.DEFAULT_SYNC_SERVER || 'https://HOST_REPLACEMENT'),
+         PURCHASE_URL: JSON.stringify(process.env.PURCHASE_URL),
+         PLANS_URL: JSON.stringify(process.env.PLANS_URL),
+         DASHBOARD_URL: JSON.stringify(process.env.DASHBOARD_URL),

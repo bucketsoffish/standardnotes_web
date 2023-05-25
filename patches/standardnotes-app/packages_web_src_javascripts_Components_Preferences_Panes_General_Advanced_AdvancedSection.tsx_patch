@@ -1,0 +1,32 @@
+diff --git a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/General/Advanced/AdvancedSection.tsx b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/General/Advanced/AdvancedSection.tsx
+index abf67b4..783e9c0 100644
+--- a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/General/Advanced/AdvancedSection.tsx
++++ b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/General/Advanced/AdvancedSection.tsx
+@@ -1,5 +1,4 @@
+ import { FunctionComponent } from 'react'
+-import OfflineSubscription from '@/Components/Preferences/Panes/General/Advanced/OfflineSubscription'
+ import { WebApplication } from '@/Application/Application'
+ import { observer } from 'mobx-react-lite'
+ import { ViewControllerManager } from '@/Controllers/ViewControllerManager'
+@@ -11,18 +10,18 @@ import PreferencesSegment from '../../../PreferencesComponents/PreferencesSegmen
+ 
+ type Props = {
+   application: WebApplication
++  /* tslint:disable:no-unused-variable */
+   viewControllerManager: ViewControllerManager
+   extensionsLatestVersions: PackageProvider
+ }
+-
++// @ts-ignore
+ const Advanced: FunctionComponent<Props> = ({ application, viewControllerManager, extensionsLatestVersions }) => {
+   return (
+     <PreferencesGroup>
+       <PreferencesSegment>
+         <AccordionItem title={'Advanced Options'}>
+           <div className="flex flex-row items-center">
+-            <div className="flex max-w-full flex-grow flex-col">
+-              <OfflineSubscription application={application} viewControllerManager={viewControllerManager} />
++            <div className="flex flex-grow flex-col">
+               <PackagesPreferencesSection
+                 className={'mt-3'}
+                 application={application}

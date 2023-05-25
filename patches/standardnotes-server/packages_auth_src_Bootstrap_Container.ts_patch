@@ -1,0 +1,12 @@
+diff --git a/node_modules/standardnotes-server/packages/auth/src/Bootstrap/Container.ts b/node_modules/standardnotes-server/packages/auth/src/Bootstrap/Container.ts
+index 351e957..3197b4c 100644
+--- a/node_modules/standardnotes-server/packages/auth/src/Bootstrap/Container.ts
++++ b/node_modules/standardnotes-server/packages/auth/src/Bootstrap/Container.ts
+@@ -434,6 +434,7 @@ export class ContainerConfigLoader {
+     container
+       .bind(TYPES.DISABLE_USER_REGISTRATION)
+       .toConstantValue(env.get('DISABLE_USER_REGISTRATION', true) === 'true')
++    container.bind(TYPES.REGISTRATION_TOKEN).toConstantValue(env.get('REGISTRATION_TOKEN'))
+     container.bind(TYPES.SNS_TOPIC_ARN).toConstantValue(env.get('SNS_TOPIC_ARN'))
+     container.bind(TYPES.SNS_AWS_REGION).toConstantValue(env.get('SNS_AWS_REGION', true))
+     container.bind(TYPES.SQS_QUEUE_URL).toConstantValue(env.get('SQS_QUEUE_URL'))

@@ -1,0 +1,144 @@
+diff --git a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/AccountMenu/CreateAccount.tsx b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/AccountMenu/CreateAccount.tsx
+index b913f53..8b64ce9 100644
+--- a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/AccountMenu/CreateAccount.tsx
++++ b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/AccountMenu/CreateAccount.tsx
+@@ -15,8 +15,6 @@ import Button from '@/Components/Button/Button'
+ import DecoratedInput from '@/Components/Input/DecoratedInput'
+ import DecoratedPasswordInput from '@/Components/Input/DecoratedPasswordInput'
+ import Icon from '@/Components/Icon/Icon'
+-import IconButton from '@/Components/Button/IconButton'
+-import AdvancedOptions from './AdvancedOptions'
+ import HorizontalSeparator from '../Shared/HorizontalSeparator'
+ 
+ type Props = {
+@@ -25,20 +23,25 @@ type Props = {
+   setMenuPane: (pane: AccountMenuPane) => void
+   email: string
+   setEmail: React.Dispatch<React.SetStateAction<string>>
++  regToken: string
++  setRegToken: React.Dispatch<React.SetStateAction<string>>
+   password: string
+   setPassword: React.Dispatch<React.SetStateAction<string>>
+ }
+ 
+-const CreateAccount: FunctionComponent<Props> = ({
+-  viewControllerManager,
++const CreateAccount: FunctionComponent<Props> = ({ // @ts-ignore
++  viewControllerManager, // @ts-ignore
+   application,
+   setMenuPane,
+   email,
+   setEmail,
++  regToken,
++  setRegToken,
+   password,
+   setPassword,
+ }) => {
+   const emailInputRef = useRef<HTMLInputElement>(null)
++  const regTokenInputRef = useRef<HTMLInputElement>(null)
+   const passwordInputRef = useRef<HTMLInputElement>(null)
+   const [isPrivateUsername, setIsPrivateUsername] = useState(false)
+ 
+@@ -55,6 +58,13 @@ const CreateAccount: FunctionComponent<Props> = ({
+     [setEmail],
+   )
+ 
++  const handleRegTokenChange = useCallback(
++    (text: string) => {
++      setRegToken(text)
++    },
++    [setRegToken],
++  )
++
+   const handlePasswordChange = useCallback(
+     (text: string) => {
+       setPassword(text)
+@@ -76,11 +86,17 @@ const CreateAccount: FunctionComponent<Props> = ({
+         return
+       }
+ 
++      if (!regToken || regToken.length === 0) {
++        regTokenInputRef.current?.focus()
++        return
++      }
++
+       setEmail(email)
++      setRegToken(regToken)
+       setPassword(password)
+       setMenuPane(AccountMenuPane.ConfirmPassword)
+     },
+-    [email, password, setPassword, setMenuPane, setEmail],
++    [email, password, setPassword, setMenuPane, setEmail, regToken, setRegToken],
+   )
+ 
+   const handleKeyDown: KeyboardEventHandler = useCallback(
+@@ -92,9 +108,10 @@ const CreateAccount: FunctionComponent<Props> = ({
+     [handleRegisterFormSubmit],
+   )
+ 
+-  const handleClose = useCallback(() => {
+-    setMenuPane(AccountMenuPane.GeneralMenu)
++  const clickSignIn = useCallback(() => {
++    setMenuPane(AccountMenuPane.SignIn)
+     setEmail('')
++    setRegToken('')
+     setPassword('')
+   }, [setEmail, setMenuPane, setPassword])
+ 
+@@ -111,23 +128,16 @@ const CreateAccount: FunctionComponent<Props> = ({
+   return (
+     <>
+       <div className="mt-1 mb-3 flex items-center px-3">
+-        <IconButton
+-          icon="arrow-left"
+-          title="Go back"
+-          className="mr-2 flex p-0 text-neutral"
+-          onClick={handleClose}
+-          focusable={true}
+-        />
+         <div className="text-base font-bold">Create account</div>
+       </div>
+       <form onSubmit={handleRegisterFormSubmit} className="mb-1 px-3">
+         <DecoratedInput
+           className={{ container: 'mb-2' }}
+           disabled={isPrivateUsername}
+-          left={[<Icon type="email" className="text-neutral" />]}
++          left={[<Icon type="user" className="text-neutral" />]}
+           onChange={handleEmailChange}
+           onKeyDown={handleKeyDown}
+-          placeholder="Email"
++          placeholder="Username"
+           ref={emailInputRef}
+           type="email"
+           value={email}
+@@ -141,14 +151,24 @@ const CreateAccount: FunctionComponent<Props> = ({
+           ref={passwordInputRef}
+           value={password}
+         />
++        <DecoratedPasswordInput
++          className={{ container: 'mb-2' }}
++          left={[<Icon type="security" className="text-neutral" />]}
++          onChange={handleRegTokenChange}
++          onKeyDown={handleKeyDown}
++          placeholder="Registration Token"
++          ref={regTokenInputRef}
++          value={regToken}
++        />
+         <Button className="mt-1" label="Next" primary onClick={handleRegisterFormSubmit} fullWidth={true} />
++        <HorizontalSeparator classes="my-2" />
++        <div className="text-sm">
++              Already have an account?{' '}
++              <button className="cursor-pointer border-0 bg-default p-0 text-info underline" onClick={clickSignIn}>
++                Sign in
++              </button>
++        </div>
+       </form>
+-      <HorizontalSeparator classes="my-2" />
+-      <AdvancedOptions
+-        application={application}
+-        viewControllerManager={viewControllerManager}
+-        onPrivateUsernameModeChange={onPrivateUsernameChange}
+-      />
+     </>
+   )
+ }

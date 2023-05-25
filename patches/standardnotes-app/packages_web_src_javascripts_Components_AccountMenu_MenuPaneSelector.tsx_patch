@@ -1,0 +1,29 @@
+diff --git a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/AccountMenu/MenuPaneSelector.tsx b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/AccountMenu/MenuPaneSelector.tsx
+index 4f05dd1..5e56bd7 100644
+--- a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/AccountMenu/MenuPaneSelector.tsx
++++ b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/AccountMenu/MenuPaneSelector.tsx
+@@ -27,6 +27,7 @@ const MenuPaneSelector: FunctionComponent<Props> = ({
+   mainApplicationGroup,
+ }) => {
+   const [email, setEmail] = useState('')
++  const [regToken, setRegToken] = useState('')
+   const [password, setPassword] = useState('')
+ 
+   switch (menuPane) {
+@@ -52,6 +53,8 @@ const MenuPaneSelector: FunctionComponent<Props> = ({
+           setMenuPane={setMenuPane}
+           email={email}
+           setEmail={setEmail}
++          regToken={regToken}
++          setRegToken={setRegToken}
+           password={password}
+           setPassword={setPassword}
+         />
+@@ -63,6 +66,7 @@ const MenuPaneSelector: FunctionComponent<Props> = ({
+           application={application}
+           setMenuPane={setMenuPane}
+           email={email}
++          regToken={regToken}
+           password={password}
+         />
+       )

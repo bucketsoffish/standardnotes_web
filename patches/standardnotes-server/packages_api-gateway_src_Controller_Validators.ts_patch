@@ -1,0 +1,36 @@
+diff --git a/node_modules/standardnotes-server/packages/api-gateway/src/Controller/Validators.ts b/node_modules/standardnotes-server/packages/api-gateway/src/Controller/Validators.ts
+new file mode 100644
+index 0000000..e3c86a1
+--- /dev/null
++++ b/node_modules/standardnotes-server/packages/api-gateway/src/Controller/Validators.ts
+@@ -0,0 +1,29 @@
++export class Validators {
++    public static isUUID(uuid: string): boolean {
++        let regex = new RegExp("^[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$");
++        if(!regex.test(uuid)) {
++            throw new Error('Invalid UUID')
++        }
++
++        return true;
++    }
++
++    public static isAlphaNumeric(str: string): boolean {
++        let regex = new RegExp("^[a-zA-Z0-9]+$");
++        if(!regex.test(str)) {
++            throw new Error('Invalid Alphanumeric')
++        }
++
++        return true;
++    }
++
++    public static isAlphaNumericWithUnderscore(str: string): boolean {
++        let regex = new RegExp("^[A-Za-z0-9_]+$");
++        if(!regex.test(str)) {
++            throw new Error('Invalid Alphanumeric')
++        }
++
++        return true;
++    }
++    
++}
+\ No newline at end of file

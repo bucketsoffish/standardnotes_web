@@ -1,0 +1,20 @@
+node_modules/
+app/
+.DS_Store
+
+/target/
+package-lock.json
+yarn.lock
+yarn-error.log
+standardnotes_web.image.docker.tar
+standardnotes_web.tar.gz
+standardnotes_api-gateway.image.docker.tar
+standardnotes_auth.image.docker.tar
+standardnotes_server.image.docker.tar
+# the below ensures you can search in vscode through node_modules for convenience
+!.vscode/settings.json
+
+.env
+data/mysql
+data/redis
+logs/

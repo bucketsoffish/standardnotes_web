@@ -1,0 +1,77 @@
+diff --git a/node_modules/standardnotes-server/packages/auth/src/Domain/UseCase/Register.ts b/node_modules/standardnotes-server/packages/auth/src/Domain/UseCase/Register.ts
+index fba93d9..2ac56bf 100644
+--- a/node_modules/standardnotes-server/packages/auth/src/Domain/UseCase/Register.ts
++++ b/node_modules/standardnotes-server/packages/auth/src/Domain/UseCase/Register.ts
+@@ -2,6 +2,7 @@ import * as bcrypt from 'bcryptjs'
+ import { RoleName } from '@standardnotes/domain-core'
+ import { ApiVersion } from '@standardnotes/api'
+ 
++import * as crypto from 'crypto'
+ import { v4 as uuidv4 } from 'uuid'
+ import { inject, injectable } from 'inversify'
+ import TYPES from '../../Bootstrap/Types'
+@@ -17,6 +18,18 @@ import { SettingServiceInterface } from '../Setting/SettingServiceInterface'
+ import { AuthResponseFactory20200115 } from '../Auth/AuthResponseFactory20200115'
+ import { AuthResponse20200115 } from '../Auth/AuthResponse20200115'
+ 
++function sleepRandom(): Promise<void> {
++  const min = 3950;
++  const max = 4000;
++  const randomDelay = Math.floor(Math.random() * (max - min + 1)) + min;
++
++  return new Promise((resolve) => {
++      setTimeout(() => {
++          resolve();
++      }, randomDelay);
++  });
++}
++
+ @injectable()
+ export class Register implements UseCaseInterface {
+   constructor(
+@@ -25,6 +38,7 @@ export class Register implements UseCaseInterface {
+     @inject(TYPES.AuthResponseFactory20200115) private authResponseFactory20200115: AuthResponseFactory20200115,
+     @inject(TYPES.Crypter) private crypter: CrypterInterface,
+     @inject(TYPES.DISABLE_USER_REGISTRATION) private disableUserRegistration: boolean,
++    @inject(TYPES.REGISTRATION_TOKEN) private registrationtoken: string,
+     @inject(TYPES.SettingService) private settingService: SettingServiceInterface,
+     @inject(TYPES.Timer) private timer: TimerInterface,
+   ) {}
+@@ -37,7 +51,27 @@ export class Register implements UseCaseInterface {
+       }
+     }
+ 
+-    const { email, password, apiVersion, ephemeralSession, ...registrationFields } = dto
++    await sleepRandom();
++    const { email, password, apiVersion, ephemeralSession, regToken, ...registrationFields } = dto
++    if (this.registrationtoken) {
++      const registrationtokenhash = crypto.createHash('sha256').update(this.registrationtoken).digest();
++      if (regToken) {
++          const regTokenHash = crypto.createHash('sha256').update(regToken).digest();
++  
++          if (!crypto.timingSafeEqual(registrationtokenhash, regTokenHash)) {
++              return {
++                  success: false,
++                  errorMessage: 'Invalid registration token.',
++              };
++          }
++      }
++      else {
++          return {
++              success: false,
++              errorMessage: 'Invalid registration token.',
++          };
++      }
++    }
+ 
+     if (apiVersion !== ApiVersion.v0) {
+       return {
+@@ -50,7 +84,7 @@ export class Register implements UseCaseInterface {
+     if (existingUser) {
+       return {
+         success: false,
+-        errorMessage: 'This email is already registered.',
++        errorMessage: 'User registration is currently not allowed.',
+       }
+     }
+ 

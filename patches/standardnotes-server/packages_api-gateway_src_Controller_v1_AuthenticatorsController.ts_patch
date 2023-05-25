@@ -1,0 +1,22 @@
+diff --git a/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v1/AuthenticatorsController.ts b/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v1/AuthenticatorsController.ts
+index f56749d..e1a2fdf 100644
+--- a/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v1/AuthenticatorsController.ts
++++ b/node_modules/standardnotes-server/packages/api-gateway/src/Controller/v1/AuthenticatorsController.ts
+@@ -4,6 +4,8 @@ import { controller, BaseHttpController, httpPost, httpGet, httpDelete } from 'i
+ 
+ import TYPES from '../../Bootstrap/Types'
+ import { HttpServiceInterface } from '../../Service/Http/HttpServiceInterface'
++import { param } from "express-validator";
++import { Validators } from '../Validators'
+ 
+ @controller('/v1/authenticators')
+ export class AuthenticatorsController extends BaseHttpController {
+@@ -11,7 +13,7 @@ export class AuthenticatorsController extends BaseHttpController {
+     super()
+   }
+ 
+-  @httpDelete('/:authenticatorId', TYPES.AuthMiddleware)
++  @httpDelete('/:authenticatorId', TYPES.AuthMiddleware, param("authenticatorId").custom(uuid => { return Validators.isUUID(uuid); }), TYPES.RequestValidator)
+   async delete(request: Request, response: Response): Promise<void> {
+     await this.httpService.callAuthServer(
+       request,

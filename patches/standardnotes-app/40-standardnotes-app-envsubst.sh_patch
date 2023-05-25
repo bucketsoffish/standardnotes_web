@@ -1,0 +1,8 @@
+diff --git a/node_modules/standardnotes-app/40-standardnotes-app-envsubst.sh b/node_modules/standardnotes-app/40-standardnotes-app-envsubst.sh
+new file mode 100644
+index 0000000..58de680
+--- /dev/null
++++ b/node_modules/standardnotes-app/40-standardnotes-app-envsubst.sh
+@@ -0,0 +1 @@
++( [[ -f /usr/share/nginx/html/index.html.template ]] && envsubst '\$APP_HOST,\$DEFAULT_SYNC_SERVER,\$DEFAULT_FILES_HOST,\$ENABLE_UNFINISHED_FEATURES,\$WEBSOCKET_URL,\$PURCHASE_URL,\$PLANS_URL,\$DASHBOARD_URL' < /usr/share/nginx/html/index.html.template > /usr/share/nginx/html/index.html && rm /usr/share/nginx/html/index.html.template ); ( [[ -f /usr/share/nginx/html/manifest.webmanifest.template ]] &&  envsubst '\$APP_HOST' < /usr/share/nginx/html/manifest.webmanifest.template > /usr/share/nginx/html/manifest.webmanifest && rm /usr/share/nginx/html/manifest.webmanifest.template ); exit 0
+\ No newline at end of file

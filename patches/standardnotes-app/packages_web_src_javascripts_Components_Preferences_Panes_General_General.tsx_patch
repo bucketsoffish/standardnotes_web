@@ -1,0 +1,35 @@
+diff --git a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/General/General.tsx b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/General/General.tsx
+index 18432e1..a26e1db 100644
+--- a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/General/General.tsx
++++ b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/General/General.tsx
+@@ -5,8 +5,6 @@ import { PackageProvider } from '@/Components/Preferences/Panes/General/Advanced
+ import { observer } from 'mobx-react-lite'
+ import Tools from './Tools'
+ import Defaults from './Defaults'
+-import LabsPane from './Labs/Labs'
+-import Advanced from '@/Components/Preferences/Panes/General/Advanced/AdvancedSection'
+ import PreferencesPane from '../../PreferencesComponents/PreferencesPane'
+ import Persistence from './Persistence'
+ import SmartViews from './SmartViews/SmartViews'
+@@ -17,20 +15,11 @@ type Props = {
+   application: WebApplication
+   extensionsLatestVersions: PackageProvider
+ }
+-
++// @ts-ignore
+ const General: FunctionComponent<Props> = ({ viewControllerManager, application, extensionsLatestVersions }) => (
+   <PreferencesPane>
+     <Persistence application={application} />
+     <Defaults application={application} />
+-    <Tools application={application} />
+-    <SmartViews application={application} featuresController={viewControllerManager.featuresController} />
+-    <Moments application={application} />
+-    <LabsPane application={application} />
+-    <Advanced
+-      application={application}
+-      viewControllerManager={viewControllerManager}
+-      extensionsLatestVersions={extensionsLatestVersions}
+-    />
+   </PreferencesPane>
+ )
+ 

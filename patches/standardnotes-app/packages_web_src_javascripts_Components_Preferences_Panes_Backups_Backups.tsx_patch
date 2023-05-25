@@ -1,0 +1,23 @@
+diff --git a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/Backups/Backups.tsx b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/Backups/Backups.tsx
+index d494c82..f513cc1 100644
+--- a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/Backups/Backups.tsx
++++ b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Preferences/Panes/Backups/Backups.tsx
+@@ -2,9 +2,7 @@ import { WebApplication } from '@/Application/Application'
+ import { ViewControllerManager } from '@/Controllers/ViewControllerManager'
+ import { FunctionComponent } from 'react'
+ import PreferencesPane from '@/Components/Preferences/PreferencesComponents/PreferencesPane'
+-import CloudLink from './CloudBackups/CloudBackups'
+ import DataBackups from './DataBackups'
+-import EmailBackups from './EmailBackups'
+ import FileBackupsCrossPlatform from './Files/FileBackupsCrossPlatform'
+ import { observer } from 'mobx-react-lite'
+ 
+@@ -18,8 +16,6 @@ const Backups: FunctionComponent<Props> = ({ application, viewControllerManager
+     <PreferencesPane>
+       <DataBackups application={application} viewControllerManager={viewControllerManager} />
+       <FileBackupsCrossPlatform application={application} />
+-      <EmailBackups application={application} />
+-      <CloudLink application={application} />
+     </PreferencesPane>
+   )
+ }

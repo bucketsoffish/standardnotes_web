@@ -1,0 +1,40 @@
+diff --git a/node_modules/standardnotes-app/packages/services/src/Domain/User/UserService.ts b/node_modules/standardnotes-app/packages/services/src/Domain/User/UserService.ts
+index 8f4ee14..438ff0e 100644
+--- a/node_modules/standardnotes-app/packages/services/src/Domain/User/UserService.ts
++++ b/node_modules/standardnotes-app/packages/services/src/Domain/User/UserService.ts
+@@ -58,7 +58,7 @@ export class UserService
+   private registering = false
+ 
+   private readonly MINIMUM_PASSCODE_LENGTH = 1
+-  private readonly MINIMUM_PASSWORD_LENGTH = 8
++  private readonly MINIMUM_PASSWORD_LENGTH = 12
+ 
+   constructor(
+     private sessionManager: SessionsClientInterface,
+@@ -132,6 +132,7 @@ export class UserService
+   public async register(
+     email: string,
+     password: string,
++    regToken: string,
+     ephemeral = false,
+     mergeLocal = true,
+   ): Promise<UserRegistrationResponseBody> {
+@@ -147,7 +148,7 @@ export class UserService
+ 
+     try {
+       this.lockSyncing()
+-      const response = await this.sessionManager.register(email, password, ephemeral)
++      const response = await this.sessionManager.register(email, password, regToken, ephemeral)
+ 
+       await this.notifyEventSync(AccountEvent.SignedInOrRegistered, {
+         payload: {
+@@ -555,7 +556,8 @@ export class UserService
+     }
+ 
+     if (parameters.newPassword !== undefined && parameters.validateNewPasswordStrength) {
+-      if (parameters.newPassword.length < this.MINIMUM_PASSWORD_LENGTH) {
++      const PASS_STRENGTH_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
++      if (parameters.newPassword.length < this.MINIMUM_PASSWORD_LENGTH ||!PASS_STRENGTH_REGEX.test(parameters.newPassword)) {
+         return {
+           error: Error(Messages.InsufficientPasswordMessage(this.MINIMUM_PASSWORD_LENGTH)),
+         }

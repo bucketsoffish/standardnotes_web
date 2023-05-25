@@ -1,0 +1,21 @@
+- Denial of Service Via Account lockout
+  - reduce signin delay to 1-2 secs
+  - add pswd strength requirements
+- Block indirect access  to internal apis
+ - lock down all api cals to require a valid session/uuid
+- Prevent Username/Email Enumeration
+ - generic error message for registration
+ - expensive registration calls (random delay)
+- Updated outdated and vulnerable dependencies
+-  Improve Login process
+ - remove free account options
+ - add registration token
+ - Prevent registration token timing attack
+ - change premium alert dialog
+- Remove UI Elements
+ -  help and feed back
+ - advanced options
+ - labs
+ - privacy
+ - email backups
+ - subscription management

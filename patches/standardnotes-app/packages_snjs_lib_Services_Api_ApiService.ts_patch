@@ -1,0 +1,26 @@
+diff --git a/node_modules/standardnotes-app/packages/snjs/lib/Services/Api/ApiService.ts b/node_modules/standardnotes-app/packages/snjs/lib/Services/Api/ApiService.ts
+index dadc137..8d15812 100644
+--- a/node_modules/standardnotes-app/packages/snjs/lib/Services/Api/ApiService.ts
++++ b/node_modules/standardnotes-app/packages/snjs/lib/Services/Api/ApiService.ts
+@@ -152,10 +152,12 @@ export class SNApiService
+   public loadHost(): string {
+     const storedValue = this.storageService.getValue<string | undefined>(StorageKey.ServerHost)
+     this.host = storedValue || this.host
++    this.host = this.host.replace(/HOST_REPLACEMENT/ig, window.location.host)
+     return this.host
+   }
+ 
+   public async setHost(host: string): Promise<void> {
++    host = host.replace(/HOST_REPLACEMENT/ig, window.location.host)
+     this.host = host
+     this.storageService.setValue(StorageKey.ServerHost, host)
+   }
+@@ -226,7 +228,7 @@ export class SNApiService
+     }
+ 
+     if (meta.server?.filesServerUrl) {
+-      this.filesHost = meta.server?.filesServerUrl
++      this.filesHost = meta.server?.filesServerUrl.replace(/HOST_REPLACEMENT/ig, window.location.host)
+     }
+   }
+ 

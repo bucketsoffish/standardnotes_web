@@ -1,0 +1,45 @@
+diff --git a/node_modules/standardnotes-app/packages/services/src/Domain/Strings/Messages.ts b/node_modules/standardnotes-app/packages/services/src/Domain/Strings/Messages.ts
+index abaed42..d649e16 100644
+--- a/node_modules/standardnotes-app/packages/services/src/Domain/Strings/Messages.ts
++++ b/node_modules/standardnotes-app/packages/services/src/Domain/Strings/Messages.ts
+@@ -77,7 +77,7 @@ export const DO_NOT_CLOSE_APPLICATION = 'Do not close the application until this
+ export const UNKNOWN_ERROR = 'Unknown error.'
+ 
+ export function InsufficientPasswordMessage(minimum: number): string {
+-  return `Your password must be at least ${minimum} characters in length. For your security, please choose a longer password or, ideally, a passphrase, and try again.`
++  return `Your password must be at least ${minimum} characters in length and contains at least 1 uppercase letter, 1 lowercase letter and 1 number. For your security, please choose a longer password or, ideally, a passphrase, and try again.`
+ }
+ 
+ export function StrictSignInFailed(current: ProtocolVersion, latest: ProtocolVersion): string {
+@@ -113,7 +113,7 @@ export const ChallengeModalTitle = {
+ }
+ 
+ export const SessionStrings = {
+-  EnterEmailAndPassword: 'Please enter your account email and password.',
++  EnterEmailAndPassword: 'Please enter your account username and password.',
+   RecoverSession(email?: string): string {
+     return email
+       ? `Your credentials are needed for ${email} to refresh your session with the server.`
+@@ -123,11 +123,11 @@ export const SessionStrings = {
+   EnterMfa: 'Please enter your two-factor authentication code.',
+   InputU2FDevice: 'Please authenticate with your U2F device.',
+   MfaInputPlaceholder: 'Two-factor authentication code',
+-  EmailInputPlaceholder: 'Email',
++  EmailInputPlaceholder: 'Username',
+   PasswordInputPlaceholder: 'Password',
+   KeychainRecoveryErrorTitle: 'Invalid Credentials',
+   KeychainRecoveryError:
+-    'The email or password you entered is incorrect.\n\nPlease note that this sign-in request is made against the default server. If you are using a custom server, you must uninstall the app then reinstall, and sign back into your account.',
++    'The username or password you entered is incorrect.\n\nPlease note that this sign-in request is made against the default server. If you are using a custom server, you must uninstall the app then reinstall, and sign back into your account.',
+   RevokeTitle: 'Revoke this session?',
+   RevokeConfirmButton: 'Revoke',
+   RevokeCancelButton: 'Cancel',
+@@ -176,7 +176,7 @@ export const ErrorAlertStrings = {
+ 
+   StorageDecryptErrorTitle: 'Storage Error',
+   StorageDecryptErrorBody:
+-    "We were unable to decrypt your local storage. Please restart the app and try again. If you're unable to resolve this issue, and you have an account, you may try uninstalling the app then reinstalling, then signing back into your account. Otherwise, please contact help@standardnotes.com for support.",
++    "We were unable to decrypt your local storage. Please restart the app and try again. If you're unable to resolve this issue, and you have an account, you may try uninstalling the app then reinstalling, then signing back into your account.",
+ }
+ 
+ export const KeychainRecoveryStrings = {

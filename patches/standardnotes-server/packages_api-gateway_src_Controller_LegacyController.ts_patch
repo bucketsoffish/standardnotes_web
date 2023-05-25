@@ -1,0 +1,41 @@
+diff --git a/node_modules/standardnotes-server/packages/api-gateway/src/Controller/LegacyController.ts b/node_modules/standardnotes-server/packages/api-gateway/src/Controller/LegacyController.ts
+index 03f3c78..2890101 100644
+--- a/node_modules/standardnotes-server/packages/api-gateway/src/Controller/LegacyController.ts
++++ b/node_modules/standardnotes-server/packages/api-gateway/src/Controller/LegacyController.ts
+@@ -3,6 +3,8 @@ import { inject } from 'inversify'
+ import { controller, all, BaseHttpController, httpPost, httpGet, results, httpDelete } from 'inversify-express-utils'
+ import TYPES from '../Bootstrap/Types'
+ import { HttpServiceInterface } from '../Service/Http/HttpServiceInterface'
++import { param } from "express-validator";
++import { Validators } from './Validators'
+ 
+ @controller('')
+ export class LegacyController extends BaseHttpController {
+@@ -34,22 +36,23 @@ export class LegacyController extends BaseHttpController {
+     await this.httpService.callLegacySyncingServer(request, response, request.path.substring(1), request.body)
+   }
+ 
+-  @httpGet('/items/:item_id/revisions', TYPES.AuthMiddleware)
++  @httpGet('/items/:item_id/revisions', TYPES.AuthMiddleware, param("item_id").custom(uuid => { return Validators.isUUID(uuid); }), TYPES.RequestValidator)
+   async legacyGetRevisions(request: Request, response: Response): Promise<void> {
+     await this.httpService.callLegacySyncingServer(request, response, request.path.substring(1), request.body)
+   }
+ 
+-  @httpGet('/items/:item_id/revisions/:id', TYPES.AuthMiddleware)
++  @httpGet('/items/:item_id/revisions/:id', TYPES.AuthMiddleware, param("item_id").custom(uuid => { return Validators.isUUID(uuid); }),
++    param("id").custom(uuid => { return Validators.isUUID(uuid); }), TYPES.RequestValidator)
+   async legacyGetRevision(request: Request, response: Response): Promise<void> {
+     await this.httpService.callLegacySyncingServer(request, response, request.path.substring(1), request.body)
+   }
+ 
+-  @httpGet('/items/mfa/:userUuid')
++  @httpGet('/items/mfa/:userUuid', param("userUuid").custom(uuid => { return Validators.isUUID(uuid); }), TYPES.RequestValidator)
+   async blockedMFARequest(): Promise<results.StatusCodeResult> {
+     return this.statusCode(401)
+   }
+ 
+-  @httpDelete('/items/mfa/:userUuid')
++  @httpDelete('/items/mfa/:userUuid', param("userUuid").custom(uuid => { return Validators.isUUID(uuid); }), TYPES.RequestValidator)
+   async blockedMFARemoveRequest(): Promise<results.StatusCodeResult> {
+     return this.statusCode(401)
+   }

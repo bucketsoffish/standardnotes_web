@@ -1,0 +1,43 @@
+diff --git a/node_modules/standardnotes-server/yarn.lock b/node_modules/standardnotes-server/yarn.lock
+index 0355c4d..3cba8c6 100644
+--- a/node_modules/standardnotes-server/yarn.lock
++++ b/node_modules/standardnotes-server/yarn.lock
+@@ -3248,6 +3248,7 @@ __metadata:
+     eslint-plugin-prettier: "npm:^4.0.0"
+     express: "npm:^4.18.2"
+     express-robots-txt: "npm:^1.0.0"
++    express-validator: "npm:^6.14.3"
+     helmet: "npm:^6.0.0"
+     inversify: "npm:^6.0.1"
+     inversify-express-utils: "npm:^6.4.3"
+@@ -6696,6 +6697,16 @@ __metadata:
+   languageName: node
+   linkType: hard
+ 
++"express-validator@npm:^6.14.3":
++  version: 6.15.0
++  resolution: "express-validator@npm:6.15.0"
++  dependencies:
++    lodash: "npm:^4.17.21"
++    validator: "npm:^13.9.0"
++  checksum: abe0fe7aa3602dd3a7207a82914e2e14b6ce3e6175fd64a63e939abd09d4cdca7b38144604970e50698500b0e7ceca92bd84d00d198270a6a48408241712ef8f
++  languageName: node
++  linkType: hard
++
+ "express-winston@npm:^4.0.5":
+   version: 4.2.0
+   resolution: "express-winston@npm:4.2.0"
+@@ -12293,6 +12304,13 @@ __metadata:
+   languageName: node
+   linkType: hard
+ 
++"validator@npm:^13.9.0":
++  version: 13.9.0
++  resolution: "validator@npm:13.9.0"
++  checksum: f9839f6c59d717dbce3f34cc20314b2bd9c39847fe543f56e87fc6874461c63f0196dc4c8ed81febf0cc2ae1c67dc47347ac2076ea3d35fa141a94d19eb5c9f5
++  languageName: node
++  linkType: hard
++
+ "vary@npm:^1, vary@npm:~1.1.2":
+   version: 1.1.2
+   resolution: "vary@npm:1.1.2"

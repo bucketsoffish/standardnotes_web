@@ -1,0 +1,13 @@
+diff --git a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Footer/AccountMenuButton.tsx b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Footer/AccountMenuButton.tsx
+index 09c71a2..5504d51 100644
+--- a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Footer/AccountMenuButton.tsx
++++ b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Footer/AccountMenuButton.tsx
+@@ -47,7 +47,7 @@ const AccountMenuButton = ({
+         togglePopover={toggleMenu}
+         side="top"
+         align="start"
+-        className="py-2"
++        className={((user === undefined || application.getIsRegistering()) ? 'fullscreen-mode-parent' : '') + " py-2"}
+       >
+         <AccountMenu
+           onClickOutside={onClickOutside}

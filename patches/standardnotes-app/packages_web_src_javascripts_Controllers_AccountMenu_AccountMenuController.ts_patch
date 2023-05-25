@@ -1,0 +1,39 @@
+diff --git a/node_modules/standardnotes-app/packages/web/src/javascripts/Controllers/AccountMenu/AccountMenuController.ts b/node_modules/standardnotes-app/packages/web/src/javascripts/Controllers/AccountMenu/AccountMenuController.ts
+index 5188a8c..6b6a7f5 100644
+--- a/node_modules/standardnotes-app/packages/web/src/javascripts/Controllers/AccountMenu/AccountMenuController.ts
++++ b/node_modules/standardnotes-app/packages/web/src/javascripts/Controllers/AccountMenu/AccountMenuController.ts
+@@ -72,6 +72,10 @@ export class AccountMenuController extends AbstractViewController {
+           } else {
+             this.setServer(this.application.getHost())
+           }
++          if(this.application.getUser() === undefined){
++            this.setShow(true)
++            this.setCurrentPane(AccountMenuPane.SignIn)
++          }
+         })
+       }, ApplicationEvent.Launched),
+     )
+@@ -94,12 +98,17 @@ export class AccountMenuController extends AbstractViewController {
+   }
+ 
+   closeAccountMenu = (): void => {
+-    this.setShouldAnimateClose(true)
+-    setTimeout(() => {
+-      this.setShow(false)
+-      this.setShouldAnimateClose(false)
+-      this.setCurrentPane(AccountMenuPane.GeneralMenu)
+-    }, 150)
++    if(this.application.getUser() === undefined){
++      this.setShow(true)
++      this.setCurrentPane(AccountMenuPane.SignIn)
++    } else {
++      this.setShouldAnimateClose(true)
++      setTimeout(() => {
++        this.setShow(false)
++        this.setShouldAnimateClose(false)
++        this.setCurrentPane(AccountMenuPane.GeneralMenu)
++      }, 0)
++    }
+   }
+ 
+   setSigningOut = (signingOut: boolean): void => {

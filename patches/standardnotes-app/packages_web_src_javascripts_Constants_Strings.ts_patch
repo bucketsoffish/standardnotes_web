@@ -1,0 +1,13 @@
+diff --git a/node_modules/standardnotes-app/packages/web/src/javascripts/Constants/Strings.ts b/node_modules/standardnotes-app/packages/web/src/javascripts/Constants/Strings.ts
+index fffb3c2..8f54b75 100644
+--- a/node_modules/standardnotes-app/packages/web/src/javascripts/Constants/Strings.ts
++++ b/node_modules/standardnotes-app/packages/web/src/javascripts/Constants/Strings.ts
+@@ -100,7 +100,7 @@ export const STRING_UPGRADE_ACCOUNT_CONFIRM_BUTTON = 'Upgrade'
+ export const STRING_REMOVE_OFFLINE_KEY_CONFIRMATION = 'This will delete the previously saved offline key.'
+ 
+ export const STRING_DELETE_ACCOUNT_CONFIRMATION =
+-  "Are you sure you want to permanently delete your account? You will be asked to confirm your account password in the next step. If you have an active paid subscription, cancel the subscription first. Otherwise, if you'd like to keep the subscription, you can re-register with the same email after deletion, and your subscription will be linked back up with your account."
++  "Are you sure you want to permanently delete your account? You will be asked to confirm your account password in the next step."
+ 
+ export const STRING_FAILED_TO_UPDATE_USER_SETTING =
+   'There was an error while trying to update your settings. Please try again.'

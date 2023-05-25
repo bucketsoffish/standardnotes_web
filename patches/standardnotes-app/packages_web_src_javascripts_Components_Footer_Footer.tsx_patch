@@ -1,0 +1,24 @@
+diff --git a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Footer/Footer.tsx b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Footer/Footer.tsx
+index 4a5fc41..b058dd4 100644
+--- a/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Footer/Footer.tsx
++++ b/node_modules/standardnotes-app/packages/web/src/javascripts/Components/Footer/Footer.tsx
+@@ -19,7 +19,6 @@ import { EditorEventSource } from '@/Types/EditorEventSource'
+ import QuickSettingsButton from './QuickSettingsButton'
+ import AccountMenuButton from './AccountMenuButton'
+ import StyledTooltip from '../StyledTooltip/StyledTooltip'
+-import UpgradeNow from './UpgradeNow'
+ import PreferencesButton from './PreferencesButton'
+ 
+ type Props = {
+@@ -378,11 +377,6 @@ class Footer extends AbstractComponent<Props, State> {
+                 quickSettingsMenuController={this.viewControllerManager.quickSettingsMenuController}
+               />
+             </div>
+-            <UpgradeNow
+-              application={this.application}
+-              featuresController={this.viewControllerManager.featuresController}
+-              subscriptionContoller={this.viewControllerManager.subscriptionController}
+-            />
+             {this.state.showBetaWarning && (
+               <Fragment>
+                 <div className="relative z-footer-bar-item ml-3 flex select-none items-center border-l border-solid border-border pl-3">
